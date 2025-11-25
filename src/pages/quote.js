@@ -12,7 +12,7 @@ export async function GET({ locals, params }) {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const quote1 = quotes[randomIndex];
 
-  const quote2 = locals.runtime.env.QUOTES?.get("quote-00003");
+  const quote2 = await locals.runtime.env.QUOTES?.get("quote-00003");
 
 
   return new Response(JSON.stringify(
