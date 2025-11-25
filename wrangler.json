@@ -10,5 +10,11 @@
 	"observability": {
 		"enabled": true
 	},
+	"kv_namespaces": [
+		{
+		"binding": "QUOTES",
+		"id": "6e028d52d4e54b969c44d59776172fb2"
+		}
+	],
 	"upload_source_maps": true
 }
