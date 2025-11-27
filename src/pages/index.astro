@@ -55,6 +55,7 @@
 				const t = Date.now();
 				const res = await fetch('/api/quote');
 				const data = await res.json();
+				const dt = Date.now() - t;
 
 				console.log(data);
 
@@ -64,7 +65,7 @@
 
 				quoteEl.textContent = data.text;
 				authorEl.textContent = `— ${data.author}`;
-				footerEl.textContent = `Fetched quote in ${Date.now() - t} ms, time taken server side: ${data.elapsedServerTime} ms.`;
+				footerEl.textContent = `Fetched quote in ${dt} ms, time taken server side: ${data.elapsedServerTime} ms.`;
 			}
 			init();
         </script>
