@@ -19,6 +19,16 @@
 				justify-content: center;
 				align-items: center;
 			}
+			footer {
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				text-align: center;
+				padding: 0.5vmax;
+				font-size: 0.5vmax;
+				background-color: #fffa;
+				color: black;
+			}
 			blockquote {
 				background-color: #fffa;
 				max-width: 80vw;
@@ -41,18 +51,22 @@
 		</style>
         <script is:inline>
             async function init() {
-            const res = await fetch('/api/quote');
-            const data = await res.json();
+					
+				const t = Date.now();
+				const res = await fetch('/api/quote');
+				const data = await res.json();
 
-            console.log(data);
+				console.log(data);
 
-            const quoteEl = document.getElementById('quote');
-            const authorEl = document.getElementById('author');
+				const quoteEl = document.getElementById('quote');
+				const authorEl = document.getElementById('author');
+				const footerEl = document.getElementById('footer');
 
-            quoteEl.textContent = data.text;
-            authorEl.textContent = `— ${data.author}`;
-        }
-        init();
+				quoteEl.textContent = data.text;
+				authorEl.textContent = `— ${data.author}`;
+				footerEl.textContent = `Fetched quote in ${Date.now() - t} ms, time taken server side: ${data.elapsedServerTime} ms.`;
+			}
+			init();
         </script>
         
 	</head>
@@ -61,5 +75,7 @@
 			<p id="quote">He who quotes himself has a fool for a source.</p>
 			<cite id="author">— Richard Steele</cite>
 		</blockquote>
+		<footer id="footer">
+		</footer>
 	</body>
 </html>
