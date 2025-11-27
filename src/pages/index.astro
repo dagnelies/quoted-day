@@ -54,6 +54,7 @@
 					
 				const t = Date.now();
 				const res = await fetch('/api/quote');
+				console.log(`Time to fetch: ${Date.now() - t}`);
 				const data = await res.json();
 				const dt = Date.now() - t;
 
