@@ -1,3 +1,11 @@
+---
+// fetch a quote and insert it server side
+import * as quoteApi from './api/quote.js';
+
+export const prerender = false; // Enables SSR for this page
+
+const quote = await quoteApi.getQuote(Astro);
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -49,33 +57,12 @@
 				color: #0007;
 			}
 		</style>
-        <script is:inline>
-            async function init() {
-					
-				const t = Date.now();
-				const res = await fetch('/api/quote');
-				console.log(`Time to fetch: ${Date.now() - t}`);
-				const data = await res.json();
-				const dt = Date.now() - t;
-
-				console.log(data);
-
-				const quoteEl = document.getElementById('quote');
-				const authorEl = document.getElementById('author');
-				const footerEl = document.getElementById('footer');
-
-				quoteEl.textContent = data.text;
-				authorEl.textContent = `— ${data.author}`;
-				footerEl.textContent = `Fetched quote in ${dt} ms, time taken server side: ${data.elapsedServerTime} ms.`;
-			}
-			init();
-        </script>
         
 	</head>
 	<body>
 		<blockquote>
-			<p id="quote">...</p>
-			<cite id="author"></cite>
+			<p id="quote">{quote.text}</p>
+			<cite id="author">— {quote.author}</cite>
 		</blockquote>
 		<footer id="footer">
 		</footer>
