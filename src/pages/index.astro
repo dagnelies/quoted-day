@@ -1,47 +1,33 @@
 ---
-import '/src/styles/global.css';
+import "/src/styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Just a simple quote of the day app made with Astro & Cloudflare Workers." />
-		<meta name="keywords" content="quote of the day,cloudflare workers,astro,ssr" />
-		<meta name="author" content="Arnaud Dagnelies" />
 
-		<title>Quote of the Day</title>
-		
-		<link rel="preload" href="/api/quote" as="fetch" />
-        <script defer>
-            async function init() {
-					
-				const t = Date.now();
-				const res = await fetch('/api/quote');
-				console.log(`Time to fetch: ${Date.now() - t}`);
-				const data = await res.json();
-				const dt = Date.now() - t;
+<BaseLayout>
+	<blockquote>
+		<p id="quote">...</p>
+		<cite id="author"></cite>
+	</blockquote>
+	<footer id="footer"></footer>
 
-				console.log(data);
+	<script>
+		async function init() {
+			const t = Date.now();
+			const res = await fetch("/api/quote");
+			console.log(`Time to fetch: ${Date.now() - t}`);
+			const data = await res.json();
+			const dt = Date.now() - t;
 
-				const quoteEl = document.getElementById('quote');
-				const authorEl = document.getElementById('author');
-				const footerEl = document.getElementById('footer');
+			console.log(data);
 
-				quoteEl.textContent = data.text;
-				authorEl.textContent = `— ${data.author}`;
-				footerEl.textContent = `Fetched quote in ${dt} ms, time taken server side: ${data.elapsedServerTime} ms.`;
-			}
-			init();
-        </script>
-        
-	</head>
-	<body>
-		<blockquote>
-			<p id="quote">...</p>
-			<cite id="author"></cite>
-		</blockquote>
-		<footer id="footer">
-		</footer>
-	</body>
-</html>
+			const quoteEl = document.getElementById("quote");
+			const authorEl = document.getElementById("author");
+			const footerEl = document.getElementById("footer");
+
+			quoteEl.textContent = data.text;
+			authorEl.textContent = `— ${data.author}`;
+			footerEl.textContent = `Fetched quote in ${dt} ms, time taken server side: ${data.elapsedServerTime} ms.`;
+		}
+		init();
+	</script>
+</BaseLayout>

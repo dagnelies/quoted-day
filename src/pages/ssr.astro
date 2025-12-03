@@ -1,25 +1,21 @@
 ---
-import '/src/styles/global.css';
-import * as quoteApi from './api/quote.js';
+import "/src/styles/global.css";
+import * as quoteApi from "./api/quote.js";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 export const prerender = false; // Enables SSR for this page
 
 // fetch a quote and insert it server side
+const t = Date.now();
 const quote = await quoteApi.getQuote(Astro);
+const dt = Date.now() - t;
 ---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Quote of the Day</title>
-	</head>
-	<body>
-		<blockquote>
-			<p id="quote">{quote.text}</p>
-			<cite id="author">— {quote.author}</cite>
-		</blockquote>
-		<footer id="footer">
-		</footer>
-	</body>
-</html>
+<BaseLayout>
+	<blockquote>
+		<p id="quote">{quote.text}</p>
+		<cite id="author">— {quote.author}</cite>
+	</blockquote>
+	<footer id="footer">Fetched quote server side in {dt} ms</footer>
+</BaseLayout>
