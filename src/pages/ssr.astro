@@ -1,9 +1,10 @@
 ---
-// fetch a quote and insert it server side
+import '/src/styles/global.css';
 import * as quoteApi from './api/quote.js';
 
 export const prerender = false; // Enables SSR for this page
 
+// fetch a quote and insert it server side
 const quote = await quoteApi.getQuote(Astro);
 ---
 <!doctype html>
@@ -12,52 +13,6 @@ const quote = await quoteApi.getQuote(Astro);
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Quote of the Day</title>
-		<style>
-			html, body {
-				height: 100vh;
-				margin: 0;
-				padding: 0;
-			}
-			body {
-				background-image: url('https://picsum.photos/800/600'); /*url('background.jpg');*/
-				background-size: cover;
-				background-position: center;
-				
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-			footer {
-				position: fixed;
-				bottom: 0;
-				width: 100%;
-				text-align: center;
-				padding: 0.5rem;
-				font-size: 1rem;
-				background-color: #fffa;
-				color: black;
-			}
-			blockquote {
-				background-color: #fffa;
-				max-width: 80vw;
-				border-radius: 1vmax;
-
-				font-family: 'Brush Script MT';
-				font-size: 3vmax;
-				color: black;
-			}
-			blockquote p {
-				margin: 2vmax;
-			}
-			blockquote cite {
-				display: block;
-				margin: 2vmax;
-				font-size: 2vmax;
-				text-align: right;
-				color: #0007;
-			}
-		</style>
-        
 	</head>
 	<body>
 		<blockquote>
