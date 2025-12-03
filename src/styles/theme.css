@@ -29,8 +29,8 @@ blockquote {
     background-color: #fffa;
     max-width: 80vw;
     border-radius: 1vmax;
-
-    font-family: 'Brush Script MT';
+    /* Every platform has its own cursive font, which makes it virtually impossible to have a consistent look without embedding a custom font. So let's just avoid Comic Sans on Windows. */
+    font-family: "Brush Script MT", cursive;
     font-size: 3vmax;
     color: black;
 }
