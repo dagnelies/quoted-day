@@ -9,8 +9,6 @@ const t = Date.now();
 const quote = await quoteApi.getQuote(Astro);
 const dt = Date.now() - t;
 ---
-
-<!doctype html>
 <BaseLayout>
 	<blockquote>
 		<p id="quote">{quote.text}</p>

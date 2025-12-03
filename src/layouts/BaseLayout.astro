@@ -1,16 +1,18 @@
 ---
 import '/src/styles/theme.css';
+
+const $t = Astro.locals.$t;
 ---
 <!doctype html>
-<html lang="en">
+<html lang="{Astro.props.lang}">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Just a simple quote of the day app made with Astro & Cloudflare Workers." />
-		<meta name="keywords" content="quote of the day,cloudflare workers,astro,ssr" />
+		<meta name="description" content="{$t('description')}" />
+		<meta name="keywords" content="quote, citation, quote of the day, cloudflare workers, astro, ssr" />
 		<meta name="author" content="Arnaud Dagnelies" />
 
-		<title>Quote of the Day</title>    
+		<title>{$t('title')}</title>    
 	</head>
 	<body>
 		<slot></slot>
