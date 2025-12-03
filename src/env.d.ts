@@ -8,7 +8,7 @@ declare namespace App {
         QUOTES: KVNamespace;
       }  
     },
-    i18n: Record<string, string>;
+    lang: string;
     $t: (key: string) => string;
   }
 }

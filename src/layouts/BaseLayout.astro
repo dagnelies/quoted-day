@@ -1,8 +1,7 @@
 ---
 import '/src/styles/theme.css';
 
-const lang = Astro.props.lang || 'en';
-const $t = Astro.locals.$t;
+const { lang, $t } = Astro.locals;
 ---
 <!doctype html>
 <html lang={lang}>

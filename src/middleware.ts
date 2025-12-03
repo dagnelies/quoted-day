@@ -9,6 +9,7 @@ export async function onRequest(context :APIContext, next :() => Promise<Respons
     return translations[key] ?? `???${key}???`;
   }
 
+  context.locals.lang = lang;
   context.locals.$t = $t;
   
   return next();
