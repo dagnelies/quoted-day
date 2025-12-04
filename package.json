@@ -1,6 +1,6 @@
 {
-	"name": "astro-blog-starter-template",
-	"description": "Build a personal website, blog, or portfolio with Astro.",
+	"name": "quoted-day",
+	"description": "A daily quote, served by Astro & Cloudflare Workers.",
 	"private": true,
 	"cloudflare": {
 		"label": "Astro Framework Starter",
