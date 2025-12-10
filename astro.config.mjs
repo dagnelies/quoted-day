@@ -8,13 +8,11 @@ import cloudflare from "@astrojs/cloudflare";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://quoted.day",
-	/*integrations: [mdx(), sitemap()],*/
+	output: "server", // activates server side rendering by default
 	adapter: cloudflare({
-		/*
 		platformProxy: {
-			enabled: true,
-		},
-		*/
+			enabled: true
+		}
 	}),
 	i18n: {
 		defaultLocale: "en",

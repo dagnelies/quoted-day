@@ -21,16 +21,22 @@
 		"typescript": "5.8.3"
 	},
 	"devDependencies": {
+		"ts-node": "^10.9.2",
 		"wrangler": "4.21.x"
 	},
 	"scripts": {
-		"astro": "astro",
+		"quotes-kv:build": "ts-node src/scripts/buildQuotesKV.ts",
+		"quotes-kv:local": "npx wrangler kv bulk put --local --binding QUOTES src/scripts/quotesKV.json",
+		"quotes-kv:remote": "npx wrangler kv bulk put --remote --binding QUOTES src/scripts/quotesKV.json",
+		
 		"build": "astro build",
-		"cf-typegen": "wrangler types",
-		"check": "astro build && tsc && wrangler deploy --dry-run",
-		"deploy": "wrangler deploy",
 		"dev": "astro dev",
-		"preview": "astro build && wrangler dev"
+		"preview": "astro build && wrangler dev",
+		"deploy": "wrangler deploy",
+		
+		"astro": "astro",
+		"cf-typegen": "wrangler types",
+		"check": "astro build && tsc && wrangler deploy --dry-run"
 	},
 	"type": "module"
 }

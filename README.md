@@ -17,3 +17,4 @@ Features:
 - ✅ 100/100 Lighthouse scores
 
 
+Thanks to https://github.com/JamesFT/Database-Quotes-JSON for the list of quotes.
