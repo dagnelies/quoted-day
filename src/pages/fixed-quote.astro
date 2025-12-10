@@ -1,0 +1,16 @@
+---
+import * as quoteApi from "./api/quote.js";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// fetch a quote and insert it server side
+const t = Date.now();
+const quote = await quoteApi.getQuote(Astro, 3);
+const dt = Date.now() - t;
+---
+<BaseLayout>
+	<blockquote>
+		<p id="quote">{quote.text}</p>
+		<cite id="author">— {quote.author}</cite>
+	</blockquote>
+	<footer id="footer">Fetched quote server side in {dt} ms</footer>
+</BaseLayout>
