@@ -3,10 +3,9 @@ Quoted Day
 
 > A daily quote, served by Astro & Cloudflare Workers.
 
-This repo
-![Preview](https://quoted.day)
+See it live: [https://quoted.day](https://quoted.day)!
 
-[![Fork & deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/dagnelies/quoted-day)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/dagnelies/quoted-day)
 
 Features:
 
