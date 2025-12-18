@@ -3,7 +3,7 @@
  */
 import fs from 'fs';
 
-const quotes = JSON.parse(fs.readFileSync('src/scripts/quotes.json', 'utf-8'));
+const quotes = JSON.parse(fs.readFileSync('scripts/quotes.json', 'utf-8'));
 const kvList :Array<{key: string, value: string}> = [];
 
 quotes.forEach((quote: { quoteText: string; quoteAuthor: string }, index: number) => {
@@ -13,5 +13,5 @@ quotes.forEach((quote: { quoteText: string; quoteAuthor: string }, index: number
   });
 });
 
-fs.writeFileSync('src/scripts/quotesKV.json', JSON.stringify(kvList, null, 2), 'utf-8');
+fs.writeFileSync('scripts/quotesKV.json', JSON.stringify(kvList, null, 2), 'utf-8');
 console.log('quotesKV.json has been created with key-value pairs for Cloudflare KV.');

@@ -22,9 +22,9 @@
 		"wrangler": "^4"
 	},
 	"scripts": {
-		"quotes-kv:build": "ts-node src/scripts/buildQuotesKV.ts",
-		"quotes-kv:local": "npx wrangler kv bulk put --local --binding QUOTES src/scripts/quotesKV.json",
-		"quotes-kv:remote": "npx wrangler kv bulk put --remote --binding QUOTES src/scripts/quotesKV.json",
+		"quotes-kv:build": "ts-node scripts/buildQuotesKV.ts",
+		"quotes-kv:local": "npx wrangler kv bulk put --local --binding QUOTES scripts/quotesKV.json",
+		"quotes-kv:remote": "npx wrangler kv bulk put --remote --binding QUOTES scripts/quotesKV.json",
 		
 		"build": "astro build",
 		"dev": "astro dev",
