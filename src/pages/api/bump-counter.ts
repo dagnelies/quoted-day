@@ -1,16 +1,31 @@
-import type { APIContext } from "astro";
+import { type APIContext } from "astro";
 
 
 export async function GET(context :APIContext) {
   
   const quotesKV = context.locals.runtime.env.QUOTES;
-  const counterRaw = await quotesKV.get(`counter-${context.clientAddress}`, { type: "text", cacheTtl: 365 * 24 * 3600 });
-  const counter = Number(counterRaw ?? "0") + 1;
-  await quotesKV.put(`counter-${context.clientAddress}`, counter.toString());
+
+  // read session id from cookie
+  let sessionId = context.cookies.get("session_id")?.value;
+  let counter = 0;
+
+  if (!sessionId) {
+    // if no session id, create one
+    sessionId = await crypto.randomUUID();
+    context.cookies.set("session_id", sessionId, {maxAge: 600}); // 10 Minutes cookie
+    await quotesKV.put(`sessions/${sessionId}`, "1", {expirationTtl: 600 }); // 10 Minutes KV TTL
+  }
+  else {
+    const counterRaw = await quotesKV.get(`sessions/${sessionId}`, { type: "text" });
+    counter = Number(counterRaw);
+  }
+  
+  counter += 1;
+  await quotesKV.put(`sessions/${sessionId}`, counter.toString(), {expirationTtl: 600 }); // 10 Minutes session cache
 
   return new Response(JSON.stringify(
     {
-      from: context.clientAddress,
+      pseudo_session: `${sessionId.substring(0, 8)}...`,
       time: new Date(Date.now()).toISOString(),
       counter
     }), {
