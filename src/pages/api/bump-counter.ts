@@ -13,7 +13,6 @@ export async function GET(context :APIContext) {
     // if no session id, create one
     sessionId = await crypto.randomUUID();
     context.cookies.set("session_id", sessionId, {maxAge: 600}); // 10 Minutes cookie
-    await quotesKV.put(`sessions/${sessionId}`, "1", {expirationTtl: 600 }); // 10 Minutes KV TTL
   }
   else {
     const counterRaw = await quotesKV.get(`sessions/${sessionId}`, { type: "text" });
