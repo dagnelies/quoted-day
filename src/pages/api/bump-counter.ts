@@ -21,9 +21,10 @@ export async function GET(context :APIContext) {
   
   counter += 1;
   const counterUpdate = quotesKV.put(`sessions/${sessionId}`, counter.toString(), {expirationTtl: 600 }); // 10 Minutes session cache
-
-  // finishes the write after the response is sent back
-  context.locals.runtime.ctx.waitUntil(counterUpdate);
+  await counterUpdate
+  
+  // alternatively, one could postpone the awaiting of the write after the response is sent back, with the obvious drawback of errors being swept under the rug
+  // context.locals.runtime.ctx.waitUntil(counterUpdate);
 
   return new Response(JSON.stringify(
     {
