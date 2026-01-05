@@ -1,13 +1,11 @@
-type Runtime = import("@astrojs/cloudflare").Runtime<Env>;
+type Runtime = import("@astrojs/cloudflare").Runtime<MyEnv>;
+
+interface MyEnv extends Cloudflare.Env {
+  QUOTES: KVNamespace;
+}
 
 declare namespace App {
   interface Locals extends Runtime {
-    // Add binding to KV namespace QUOTES
-    runtime: {
-      env: {
-        QUOTES: KVNamespace;
-      }  
-    },
     lang: string;
     $t: (key: string) => string;
   }

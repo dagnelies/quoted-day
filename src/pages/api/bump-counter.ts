@@ -4,7 +4,7 @@ import { type APIContext } from "astro";
 export async function GET(context :APIContext) {
   
   const quotesKV = context.locals.runtime.env.QUOTES;
-
+  
   // read session id from cookie
   let sessionId = context.cookies.get("session_id")?.value;
   let counter = 0;
@@ -20,7 +20,10 @@ export async function GET(context :APIContext) {
   }
   
   counter += 1;
-  await quotesKV.put(`sessions/${sessionId}`, counter.toString(), {expirationTtl: 600 }); // 10 Minutes session cache
+  const counterUpdate = quotesKV.put(`sessions/${sessionId}`, counter.toString(), {expirationTtl: 600 }); // 10 Minutes session cache
+
+  // finishes the write after the response is sent back
+  context.locals.runtime.ctx.waitUntil(counterUpdate);
 
   return new Response(JSON.stringify(
     {
